@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Suitability</title>
+    <link href="style2.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Crop Selection Guide</h1>
+    </header>
+    <div class="container">
+        <div class="form">
+            <h2>Select Crop Parameters</h2>
+            <form id="cropForm">
+                <label for="soilType">Soil Type:</label>
+                <select id="soilType">
+                    <option value="clay">Clay Soil</option>
+                    <option value="sandy">Sandy Soil</option>
+                    <option value="loamy">Loamy Soil</option>
+                    <option value="laterite">Laterite Soil</option>
+                </select>
+
+                <label for="moisture">Soil Moisture:</label>
+                <select id="moisture">
+                    <option value="low">Low</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="high">High</option>
+                </select>
+
+                <label for="fertility">Soil Fertility:</label>
+                <select id="fertility">
+                    <option value="low">Low</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="high">High</option>
+                </select>
+
+                <label for="management">Management Practice:</label>
+                <select id="management">
+                    <option value="organic">Organic Matter Addition</option>
+                    <option value="cover_crops">Cover Crops</option>
+                    <option value="mulching">Mulching</option>
+                    <option value="no_till">No-Till Farming</option>
+                </select>
+
+                <label for="timePeriod">Time Period:</label>
+                <select id="timePeriod">
+                    <option value="short_term">Short-Term</option>
+                    <option value="long_term">Long-Term</option>
+                </select>
+
+                <button type="button" onclick="getSuitableCrops()">Get Suitable Crops</button>
+            </form>
+        </div>
+
+        <div class="ans">
+            <h2>Suitable Crops:</h2>
+            <p id="suitableCrops">Select options above to see suitable crops.</p>
+        </div>
+    </div>
+
+    <script>
+        function getSuitableCrops() {
+            const soilType = document.getElementById("soilType").value;
+            const moisture = document.getElementById("moisture").value;
+            const fertility = document.getElementById("fertility").value;
+            const management = document.getElementById("management").value;
+            const timePeriod = document.getElementById("timePeriod").value;
+
+            let key = `${soilType}_${moisture}_${fertility}_${management}_${timePeriod}`;
+            let crops;
+
+            const cropOptions = {
+                // Clay Soil
+                "clay_low_low_organic_short_term": "Suitable crops: Okra 🍆, Groundnut 🥜, Pearl Millet 🌾",
+                "clay_low_low_organic_long_term": "Suitable crops: Soybean 🌱, Lentils 🍲, Chickpeas 🌱",
+                "clay_low_low_cover_crops_short_term": "Suitable crops: Sorghum 🌾, Sunflower 🌻, Corn 🌽",
+                "clay_low_low_cover_crops_long_term": "Suitable crops: Soybean 🌱, Chickpeas 🌱, Lentils 🍲",
+                "clay_low_low_mulching_short_term": "Suitable crops: Corn 🌽, Sunflower 🌻, Pearl Millet 🌾",
+                "clay_low_low_mulching_long_term": "Suitable crops: Soybean 🌱, Groundnut 🥜, Lentils 🍲",
+                "clay_low_low_no_till_short_term": "Suitable crops: Sorghum 🌾, Sunflower 🌻, Okra 🍆",
+                "clay_low_low_no_till_long_term": "Suitable crops: Soybean 🌱, Corn 🌽, Groundnut 🥜",
+
+                // Sandy Soil
+                "sandy_low_low_organic_short_term": "Suitable crops: Groundnut 🥜, Pigeon Pea 🌱, Pearl Millet 🌾",
+                "sandy_low_low_organic_long_term": "Suitable crops: Chickpeas 🌱, Sunflower 🌻, Soybean 🌱",
+                "sandy_low_low_cover_crops_short_term": "Suitable crops: Corn 🌽, Sorghum 🌾, Sunflower 🌻",
+                "sandy_low_low_cover_crops_long_term": "Suitable crops: Soybean 🌱, Lentils 🍲, Chickpeas 🌱",
+                "sandy_low_low_mulching_short_term": "Suitable crops: Sunflower 🌻, Corn 🌽, Groundnut 🥜",
+                "sandy_low_low_mulching_long_term": "Suitable crops: Pigeon Pea 🌱, Soybean 🌱, Lentils 🍲",
+                "sandy_low_low_no_till_short_term": "Suitable crops: Sunflower 🌻, Corn 🌽, Pigeon Pea 🌱",
+                "sandy_low_low_no_till_long_term": "Suitable crops: Soybean 🌱, Lentils 🍲, Chickpeas 🌱",
+
+                // Loamy Soil
+                "loamy_low_low_organic_short_term": "Suitable crops: Soybean 🌱, Sorghum 🌾, Sunflower 🌻",
+                "loamy_low_low_organic_long_term": "Suitable crops: Corn 🌽, Groundnut 🥜, Pigeon Pea 🌱",
+                "loamy_low_low_cover_crops_short_term": "Suitable crops: Sunflower 🌻, Soybean 🌱, Lentils 🍲",
+                "loamy_low_low_cover_crops_long_term": "Suitable crops: Chickpeas 🌱, Corn 🌽, Groundnut 🥜",
+                "loamy_low_low_mulching_short_term": "Suitable crops: Soybean 🌱, Lentils 🍲, Sunflower 🌻",
+                "loamy_low_low_mulching_long_term": "Suitable crops: Corn 🌽, Groundnut 🥜, Pigeon Pea 🌱",
+                "loamy_low_low_no_till_short_term": "Suitable crops: Soybean 🌱, Sunflower 🌻, Lentils 🍲",
+                "loamy_low_low_no_till_long_term": "Suitable crops: Corn 🌽, Chickpeas 🌱, Groundnut 🥜",
+
+                // Laterite Soil
+                "laterite_low_low_organic_short_term": "Suitable crops: Coffee ☕, Cashew 🥜, Pineapple 🍍",
+                "laterite_low_low_organic_long_term": "Suitable crops: Coffee ☕, Tea 🍵, Areca Nut 🌴",
+                "laterite_low_low_cover_crops_short_term": "Suitable crops: Pineapple 🍍, Turmeric 🌿, Cashew 🥜",
+                "laterite_low_low_cover_crops_long_term": "Suitable crops: Coffee ☕, Tea 🍵, Areca Nut 🌴",
+                "laterite_low_low_mulching_short_term": "Suitable crops: Cashew 🥜, Coffee ☕, Pineapple 🍍",
+                "laterite_low_low_mulching_long_term": "Suitable crops: Coffee ☕, Tea 🍵, Areca Nut 🌴",
+                "laterite_low_low_no_till_short_term": "Suitable crops: Pineapple 🍍, Turmeric 🌿, Cashew 🥜",
+                "laterite_low_low_no_till_long_term": "Suitable crops: Coffee ☕, Tea 🍵, Areca Nut 🌴"
+            };
+
+            crops = cropOptions[key] || "No suitable crops found for the selected options.";
+
+            document.getElementById("suitableCrops").innerText = crops;
+        }
+    </script>
+</body>
+</html>

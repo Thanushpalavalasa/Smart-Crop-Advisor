@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e8f5e9; /* Light green background for the body */
+    height: 100vh; /* Full viewport height */
+}
+
+header {
+    background-color: #4682B4; /* Change header color to a shade of green */
+    color: #000000;
+    padding: 20px;
+    text-align: center; /* Centered header text */
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px; /* Adjusted margin for spacing */
+}
+
+nav ul li a {
+    color: #000000;
+    text-decoration: none;
+    font-size: 18px; /* Increased font size for navigation */
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns layout */
+    gap: 20px; /* Space between boxes */
+    max-width: 1200px; /* Maximum width for the grid */
+    margin: 20px auto; /* Center the grid */
+    height: calc(100vh - 120px); /* Adjust height to account for header and footer */
+}
+
+.box {
+    padding: 30px; /* Adjusted padding for a smaller box */
+    font-size: 20px; /* Font size for the boxes */
+    text-align: center;
+    border-radius: 12px; /* Rounded corners for boxes */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Deeper shadow for depth */
+    color: #333; /* Text color */
+    width: 100%; /* Ensure the box takes full width of the grid cell */
+    height: 50%; /* Set height to 50% of the container */
+}
+
+/* Background colors for each box */
+.crop {
+    background-color: #fff9c4; /* Soft yellow */
+}
+
+.insect {
+    background-color: #c8e6c9; /* Soft green */
+}
+
+.fertilizer {
+    background-color: #bbdefb; /* Soft blue */
+}
+
+.aboutus {
+    background-color: #ffcdd2; /* Soft red */
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+    position: relative; /* To prevent footer overlap */
+    bottom: 0; /* Stick to the bottom */
+    width: 100%; /* Full width */
+}

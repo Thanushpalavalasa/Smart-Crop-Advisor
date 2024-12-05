@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crop Yield Factors</title>
+</head>
+<body>
+
+<h2>Factor 1: Soil Type</h2>
+<select id="factor1">
+  <option value="sandy">Sandy</option>
+  <option value="clay">Clay</option>
+  <option value="loamy">Loamy</option>
+  <option value="peat">Peat</option>
+</select>
+
+<h2>Factor 2: Water Availability</h2>
+<select id="factor2">
+  <option value="low">Low</option>
+  <option value="moderate">Moderate</option>
+  <option value="high">High</option>
+  <option value="excessive">Excessive</option>
+</select>
+
+<h2>Factor 3: Sunlight Exposure</h2>
+<select id="factor3">
+  <option value="low">Low</option>
+  <option value="moderate">Moderate</option>
+  <option value="high">High</option>
+  <option value="excessive">Excessive</option>
+</select>
+
+<h2>Factor 4: Fertilizer Usage</h2>
+<select id="factor4">
+  <option value="none">None</option>
+  <option value="low">Low</option>
+  <option value="moderate">Moderate</option>
+  <option value="high">High</option>
+</select>
+
+<button onclick="getAnswer()">Get Answer</button>
+
+<p id="answer"></p>
+
+<script>
+  // Define the answers for each combination of selections
+  const factors1 = ['sandy', 'clay', 'loamy', 'peat'];
+  const factors2 = ['low', 'moderate', 'high', 'excessive'];
+  const factors3 = ['low', 'moderate', 'high', 'excessive'];
+  const factors4 = ['none', 'low', 'moderate', 'high'];
+  const answers = {};
+
+  factors1.forEach(f1 => {
+    factors2.forEach(f2 => {
+      factors3.forEach(f3 => {
+        factors4.forEach(f4 => {
+          const key = `${f1}_${f2}_${f3}_${f4}`;
+          answers[key] = `Yield for ${f1} soil, ${f2} water, ${f3} sunlight, and ${f4} fertilizer.`;
+        });
+      });
+    });
+  });
+
+  // Function to get the selected options and display the corresponding answer
+  function getAnswer() {
+      const factor1 = document.getElementById("factor1").value;
+      const factor2 = document.getElementById("factor2").value;
+      const factor3 = document.getElementById("factor3").value;
+      const factor4 = document.getElementById("factor4").value;
+      const key = factor1 + "_" + factor2 + "_" + factor3 + "_" + factor4;
+      const answer = answers[key];
+      if (answer) {
+          document.getElementById("answer").innerText = answer;
+      } else {
+          document.getElementById("answer").innerText = "No answer found for the selected combination.";
+      }
+  }
+</script>
+
+</body>
+</html>

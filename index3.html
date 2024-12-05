@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insecticide Selection</title>
+    <link href="style2.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Insecticide Selection</h1>
+    </header>
+    <div class="container">
+        <div class="form">
+            <form id="insecticideForm">
+                <label for="targetPest">Target Pest:</label>
+                <select id="targetPest">
+                    <option value="aphids">Aphids 🐜</option>
+                    <option value="caterpillars">Caterpillars 🦋</option>
+                    <option value="beetles">Beetles 🐞</option>
+                    <option value="whiteflies">Whiteflies ☁️</option>
+                    <option value="mosquitoes">Mosquitoes 🦟</option>
+                    <option value="thrips">Thrips 🌪️</option>
+                    <option value="mealybugs">Mealybugs 🐛</option>
+                </select><br><br>
+
+                <label for="modeOfAction">Mode of Action:</label>
+                <select id="modeOfAction">
+                    <option value="contact">Contact Action ⚡</option>
+                    <option value="ingestion">Ingestion 💧</option>
+                    <option value="systemic">Systemic 🌱</option>
+                    <option value="growth_regulator">Growth Regulator 🐛</option>
+                    <option value="repellent">Repellent 🚫</option>
+                    <option value="fumigant">Fumigant 💨</option>
+                </select><br><br>
+
+                <label for="environmentalImpact">Environmental Impact:</label>
+                <select id="environmentalImpact">
+                    <option value="low">Low Impact 🌍</option>
+                    <option value="moderate">Moderate Impact 🌿</option>
+                    <option value="high">High Impact ⚠️</option>
+                    <option value="very_high">Very High Impact ☠️</option>
+                </select><br><br>
+
+                <label for="safetyRegulations">Safety and Regulations:</label>
+                <select id="safetyRegulations">
+                    <option value="compliant">Compliant ✅</option>
+                    <option value="non_compliant">Non-Compliant 🚫</option>
+                    <option value="restricted">Restricted Use 🔒</option>
+                </select><br><br>
+
+                <button type="button" onclick="getSuitableInsecticides()">Get Suitable Insecticides</button>
+            </form>
+        </div>
+        <div class="ans">
+            <h2>Suitable Insecticides:</h2>
+            <p id="suitableInsecticides">Select options above to see suitable insecticides.</p>
+        </div>
+    </div>
+
+    <script>
+        function getSuitableInsecticides() {
+            const targetPest = document.getElementById("targetPest").value;
+            const modeOfAction = document.getElementById("modeOfAction").value;
+            const environmentalImpact = document.getElementById("environmentalImpact").value;
+            const safetyRegulations = document.getElementById("safetyRegulations").value;
+
+            let key = `${targetPest}_${modeOfAction}_${environmentalImpact}_${safetyRegulations}`;
+            let insecticides;
+
+            const insecticideOptions = {
+                // Aphids
+                "aphids_contact_low_compliant": "Suitable Insecticides: Insecticidal Soap 🧼, Neem Oil 🌿. Effective and low-impact options for aphids.",
+                "aphids_contact_moderate_compliant": "Suitable Insecticides: Pyrethrin ⚡, Horticultural Oil 🌱. Moderate impact with effective results.",
+                "aphids_ingestion_low_compliant": "Suitable Insecticides: Bacillus thuringiensis (Bt) 🦠. Low toxicity to non-target organisms.",
+                "aphids_growth_regulator_low_compliant": "Suitable Insecticides: Insect Growth Regulators (IGRs) 🐛. Helps in disrupting the life cycle of aphids.",
+                
+                // Caterpillars
+                "caterpillars_contact_low_compliant": "Suitable Insecticides: Insecticidal Soap 🧼, Neem Oil 🌿. Low-impact options for caterpillar control.",
+                "caterpillars_systemic_high_compliant": "Suitable Insecticides: Imidacloprid 🌱. Systemic and effective against caterpillars.",
+                "caterpillars_growth_regulator_moderate_compliant": "Suitable Insecticides: Methoxyfenozide 🌱. A growth regulator effective against caterpillars.",
+                
+                // Beetles
+                "beetles_growth_regulator_low_compliant": "Suitable Insecticides: Methoprene 🐛. Effective growth regulator for beetles.",
+                "beetles_contact_moderate_compliant": "Suitable Insecticides: Pyrethroids ⚡. Moderate impact with fast action against beetles.",
+                "beetles_systemic_high_compliant": "Suitable Insecticides: Clothianidin 🌱. Systemic insecticide effective for beetles.",
+                
+                // Whiteflies
+                "whiteflies_contact_high_compliant": "Suitable Insecticides: Insecticidal Soap 🧼, Horticultural Oil 🌱. Effective for whiteflies.",
+                "whiteflies_systemic_low_compliant": "Suitable Insecticides: Imidacloprid 🌱. Systemic control for whiteflies with low toxicity.",
+                "whiteflies_growth_regulator_low_compliant": "Suitable Insecticides: Buprofezin 🐛. Disrupts the growth cycle of whiteflies.",
+
+                // Mosquitoes
+                "mosquitoes_growth_regulator_low_compliant": "Suitable Insecticides: Methoprene 🐛. Targets mosquito larvae.",
+                "mosquitoes_contact_high_compliant": "Suitable Insecticides: Pyrethrin ⚡. Fast-acting and effective for adult mosquitoes.",
+                "mosquitoes_repellent_low_compliant": "Suitable Insecticides: Citronella Oil 🌿. Natural repellent for mosquitoes.",
+
+                // Thrips
+                "thrips_contact_low_compliant": "Suitable Insecticides: Insecticidal Soap 🧼, Neem Oil 🌿. Effective and safe for thrips.",
+                "thrips_growth_regulator_low_compliant": "Suitable Insecticides: Spinosad 🦠. Effective against thrips and has low toxicity.",
+                
+                // Mealybugs
+                "mealybugs_contact_low_compliant": "Suitable Insecticides: Insecticidal Soap 🧼, Neem Oil 🌿. Safe options for mealybugs.",
+                "mealybugs_systemic_moderate_compliant": "Suitable Insecticides: Dinotefuran 🌱. Systemic option for controlling mealybugs.",
+
+                // High Impact
+                "aphids_contact_high_non_compliant": "Warning: High impact insecticides may harm beneficial insects! Use with caution. Suggested: Chlorpyrifos 💥.",
+                "caterpillars_systemic_high_non_compliant": "Warning: High impact insecticides may harm non-target species! Use carefully. Suggested: Carbaryl 💥.",
+                "whiteflies_growth_regulator_very_high_non_compliant": "Warning: Very high impact options! Suggested: Acetamiprid 🌱.",
+            };
+
+            insecticides = insecticideOptions[key] || "No suitable insecticides found for the selected options.";
+
+            document.getElementById("suitableInsecticides").innerText = insecticides;
+        }
+    </script>
+</body>
+</html>

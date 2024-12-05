@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fertilizer Selection</title>
+    <link href="style2.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Fertilizer Selection</h1>
+    </header>
+    <div class="container">
+        <div class="form">
+            <form id="fertilizerForm">
+                <label for="nutrientContent">Nutrient Content (NPK Ratio):</label>
+                <select id="nutrientContent">
+                    <option value="highN">High Nitrogen (N) 🌱</option>
+                    <option value="highP">High Phosphorus (P) 🌼</option>
+                    <option value="highK">High Potassium (K) 🍌</option>
+                    <option value="balanced">Balanced NPK 🌿</option>
+                    <option value="micronutrients">Micronutrient-Rich 🥬</option>
+                </select><br><br>
+
+                <label for="soilTest">Soil Test Results:</label>
+                <select id="soilTest">
+                    <option value="deficientN">Deficient in Nitrogen 🚫🌱</option>
+                    <option value="deficientP">Deficient in Phosphorus 🚫🌼</option>
+                    <option value="deficientK">Deficient in Potassium 🚫🍌</option>
+                    <option value="adequate">Nutrients Adequate ✅</option>
+                    <option value="acidic">Soil is Acidic ⚠️</option>
+                    <option value="alkaline">Soil is Alkaline ⚖️</option>
+                    <option value="saline">Soil is Saline 🌊</option>
+                </select><br><br>
+
+                <label for="cropRequirements">Crop Requirements:</label>
+                <select id="cropRequirements">
+                    <option value="leafy">Leafy Vegetables 🥬</option>
+                    <option value="root">Root Crops 🥕</option>
+                    <option value="fruits">Fruiting Crops 🍅</option>
+                    <option value="grains">Grains 🌾</option>
+                    <option value="flowers">Flowering Plants 🌸</option>
+                    <option value="perennials">Perennial Crops 🌳</option>
+                    <option value="herbs">Herbs 🌿</option>
+                </select><br><br>
+
+                <label for="soilType">Soil Type:</label>
+                <select id="soilType">
+                    <option value="sandy">Sandy Soil 🏖️</option>
+                    <option value="clay">Clay Soil 🏺</option>
+                    <option value="loamy">Loamy Soil 🏞️</option>
+                    <option value="saline">Saline Soil 🌊</option>
+                    <option value="peat">Peaty Soil 🦠</option>
+                </select><br><br>
+
+                <button type="button" onclick="getSuitableFertilizers()">Get Suitable Fertilizers</button>
+            </form>
+        </div>
+        <div class="ans">
+            <h2>Suitable Fertilizers:</h2>
+            <p id="suitableFertilizers">Select options above to see suitable fertilizers.</p>
+        </div>
+    </div>
+
+    <script>
+        function getSuitableFertilizers() {
+            const nutrientContent = document.getElementById("nutrientContent").value;
+            const soilTest = document.getElementById("soilTest").value;
+            const cropRequirements = document.getElementById("cropRequirements").value;
+            const soilType = document.getElementById("soilType").value;
+
+            let key = `${nutrientContent}_${soilTest}_${cropRequirements}_${soilType}`;
+            let fertilizers;
+
+            const fertilizerOptions = {
+                // High Nitrogen
+                "highN_deficientN_leafy_sandy": "Suitable Fertilizers: Urea 🌱, Ammonium Sulfate 🌿. Excellent for enhancing leafy growth in sandy soils.",
+                "highN_deficientN_leafy_clay": "Suitable Fertilizers: Urea 🌱, Blood Meal 🩸. Ideal for rich foliage in clay soils.",
+                "highN_deficientN_root_sandy": "Suitable Fertilizers: Ammonium Nitrate 💧, Calcium Nitrate 💧. Supports root development.",
+                "highN_deficientN_fruits_loamy": "Suitable Fertilizers: Urea 🌱, Liquid Fish Fertilizer 🐟. Promotes fruit set and quality.",
+                "highN_deficientN_flower_loamy": "Suitable Fertilizers: Fish Emulsion 🐟, Blood Meal 🩸. Enhances flowering in loamy soils.",
+                "highN_deficientN_perennials_clay": "Suitable Fertilizers: Organic Compost ♻️, Urea 🌱. Supports long-term growth for perennials.",
+                "highN_deficientN_herbs_loamy": "Suitable Fertilizers: Alfalfa Meal 🌿, Fish Emulsion 🐟. Promotes lush growth of herbs.",
+
+                // High Phosphorus
+                "highP_deficientP_leafy_sandy": "Suitable Fertilizers: Superphosphate 🧪, Rock Phosphate 🪨. Encourages strong root development.",
+                "highP_deficientP_root_clay": "Suitable Fertilizers: Triple Superphosphate 🧪, Bone Meal 🦴. Ideal for root crops.",
+                "highP_deficientP_fruits_loamy": "Suitable Fertilizers: Monoammonium Phosphate (MAP) 🧪, DAP 🧪. Supports fruiting and flowering.",
+                "highP_deficientP_flower_sandy": "Suitable Fertilizers: Bone Meal 🦴, Superphosphate 🧪. Enhances blooming in flowering plants.",
+                "highP_deficientP_perennials_clay": "Suitable Fertilizers: Rock Phosphate 🪨, Bone Meal 🦴. Promotes strong root systems in perennials.",
+                "highP_deficientP_herbs_loamy": "Suitable Fertilizers: Fish Bone Meal 🐟, Organic Fertilizers 🌱. Improves nutrient uptake in herbs.",
+
+                // High Potassium
+                "highK_deficientK_fruits_loamy": "Suitable Fertilizers: Potassium Sulfate 🍌, KCl 🌊. Essential for fruit quality.",
+                "highK_deficientK_flower_clay": "Suitable Fertilizers: KCl 🌊, Sulfate of Potash 🍌. Enhances flowering and fruiting.",
+                "highK_deficientK_grains_sandy": "Suitable Fertilizers: K2O 🌾, Potassium Nitrate 🌊. Supports grain filling.",
+                "highK_deficientK_leafy_loamy": "Suitable Fertilizers: K2SO4 🍌, Green Manure 🌱. Promotes leafy growth.",
+                "highK_deficientK_root_clay": "Suitable Fertilizers: Potassium Sulfate 🍌, KNO3 💧. Improves root health.",
+
+                // Balanced NPK
+                "balanced_adequate_leafy_sandy": "Suitable Fertilizers: Complete NPK fertilizers (10-10-10) 🌿. Provides overall growth support.",
+                "balanced_adequate_root_clay": "Suitable Fertilizers: 10-10-10 NPK 🌿 or 14-14-14 NPK 🌿. Balanced nutrient supply for root crops.",
+                "balanced_adequate_fruits_loamy": "Suitable Fertilizers: 20-20-20 NPK 🌿. Promotes fruiting and flowering.",
+                "balanced_adequate_grains_sandy": "Suitable Fertilizers: 15-15-15 NPK 🌿. Supports grain production.",
+                "balanced_adequate_herbs_loamy": "Suitable Fertilizers: Balanced Organic Fertilizer 🌱. Enhances flavor and aroma of herbs.",
+                
+                // Micronutrient-Rich
+                "micronutrients_adequate_leafy_loamy": "Suitable Fertilizers: Seaweed Extract 🌊, Chelated Micronutrients 🧪. Supports overall plant health.",
+                "micronutrients_acidic_flower_clay": "Suitable Fertilizers: Dolomitic Lime ⛰️, Micronutrient Mix 🧪. Corrects acidity and provides micronutrients.",
+                "micronutrients_deficientN_fruits_loamy": "Suitable Fertilizers: Micronutrient Foliar Spray 🌱. Enhances fruiting in deficient soils.",
+
+                // Acidic Soil
+                "balanced_acidic_fruits_sandy": "Suitable Fertilizers: Lime ⛰️, Sulfur 🧪. Helps to balance soil pH and promotes healthy growth.",
+                "balanced_acidic_root_loamy": "Suitable Fertilizers: Organic Compost ♻️, Gypsum ⛰️. Improves soil structure and nutrient availability.",
+                "balanced_acidic_leafy_clay": "Suitable Fertilizers: Lime ⛰️, Organic Matter ♻️. Neutralizes pH for leafy crops.",
+
+                // Alkaline Soil
+                "balanced_alkaline_leafy_clay": "Suitable Fertilizers: Gypsum ⛰️, Iron Chelates 🧪. Addresses nutrient lock-up in alkaline conditions.",
+                "balanced_alkaline_fruits_loamy": "Suitable Fertilizers: Acidifying Fertilizers 🍋, Organic Matter ♻️. Helps to adjust pH for fruits.",
+
+                // Saline Soil
+                "balanced_saline_leafy_loamy": "Suitable Fertilizers: Organic Mulch 🍂, Gypsum ⛰️. Reduces salinity effects.",
+                "balanced_saline_fruits_clay": "Suitable Fertilizers: Seaweed Extract 🌊, Potassium Fertilizers 🍌. Improves health in saline conditions.",
+            };
+
+            fertilizers = fertilizerOptions[key] || "No suitable fertilizers found for the selected options.";
+
+            document.getElementById("suitableFertilizers").innerText = fertilizers;
+        }
+    </script>
+</body>
+</html>
