@@ -3,8 +3,8 @@ session_start();
 
 // Database connection
 $servername = "localhost";
-$username = "root"; // Change this if needed
-$password = ""; // Change this if needed
+$username = "root"; // Change this to your database username
+$password = ""; // Change this to your database password
 $dbname = "userdb";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -26,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Verify the password
         if (password_verify($password, $user['password'])) {
             $_SESSION['username'] = $username;
-            // Redirect to home.html
             header("Location: home.html");
             exit();
         } else {
