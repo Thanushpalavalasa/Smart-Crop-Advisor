@@ -3,8 +3,8 @@ session_start();
 
 // Database connection
 $servername = "localhost";
-$username = "root"; // Change this to your database username
-$password = ""; // Change this to your database password
+$username = "root"; // Change this if needed
+$password = ""; // Change this if needed
 $dbname = "userdb";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -26,8 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Verify the password
         if (password_verify($password, $user['password'])) {
             $_SESSION['username'] = $username;
-            echo "Login successful!";
-            // Redirect to another page or dashboard
+            // Redirect to home.html
+            header("Location: home.html");
+            exit();
         } else {
             echo "Invalid username or password.";
         }
